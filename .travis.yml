@@ -32,10 +32,11 @@ matrix:
     #   env: DEPENDENCIES=low
     - php: 7.3
       env: COVERAGE=true
-    - php: 7.4
     # Could be enabled when we'll upgrade PHPUnit
     # - php: 7.3
     #   env: DEPENDENCIES=low
+    - php: 7.4
+    - php: 8.0
     - php: 5.3
       dist: precise
       env: BUILD_PHAR=true
