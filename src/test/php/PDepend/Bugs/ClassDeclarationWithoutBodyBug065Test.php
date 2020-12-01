@@ -157,6 +157,10 @@ class ClassDeclarationWithoutBodyBug065Test extends AbstractRegressionTest
      */
     public function testClassDeclarationWithParentInterfaceWithoutBody()
     {
+        if (version_compare(PHP_VERSION, '8.0.0', '>=')) {
+            $this->markTestSkipped('PHP 8 behave with unexpected token instead.');
+        }
+
         $this->setExpectedException(
             'RuntimeException',
             'Unexpected end of token stream in file: '
@@ -173,6 +177,10 @@ class ClassDeclarationWithoutBodyBug065Test extends AbstractRegressionTest
      */
     public function testClassDeclarationWithIncompleteParentInterfaceWithoutBody()
     {
+        if (version_compare(PHP_VERSION, '8.0.0', '>=')) {
+            $this->markTestSkipped('PHP 8 behave with unexpected token instead.');
+        }
+
         $this->setExpectedException(
             'RuntimeException',
             'Unexpected end of token stream in file: '
