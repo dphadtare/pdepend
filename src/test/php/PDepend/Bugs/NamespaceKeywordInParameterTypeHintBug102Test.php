@@ -60,6 +60,7 @@ class NamespaceKeywordInParameterTypeHintBug102Test extends AbstractRegressionTe
      * testParserHandlesNamespaceKeywordInFunctionParameterTypeHint
      *
      * @return void
+     * @group i
      */
     public function testParserHandlesNamespaceKeywordInFunctionParameterTypeHint()
     {

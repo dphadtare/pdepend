@@ -5739,8 +5739,11 @@ abstract class AbstractPHPParser
             case Tokens::T_STRING:
             case Tokens::T_BACKSLASH:
             case Tokens::T_NAMESPACE:
+            // case Tokens::T_CLASS_FQN:
+
                 return true;
         }
+
         return false;
     }
 
@@ -5756,6 +5759,7 @@ abstract class AbstractPHPParser
             case Tokens::T_STRING:
             case Tokens::T_BACKSLASH:
             case Tokens::T_NAMESPACE:
+            case Tokens::T_CLASS:
                 return $this->builder->buildAstClassOrInterfaceReference(
                     $this->parseQualifiedName()
                 );
@@ -6125,13 +6129,12 @@ abstract class AbstractPHPParser
             $qualifiedName[] = $this->parseClassName();
 
             $this->consumeComments();
-        }
+            $tokenType = $this->tokenizer->peek();
 
-        $next = $this->tokenizer->peekNext();
-
-        // Stop here for simple identifier
-        if ($next !== Tokens::T_BACKSLASH && !empty($qualifiedName)) {
-            return $qualifiedName;
+            // Stop here for simple identifier
+            if ($tokenType !== Tokens::T_BACKSLASH) {
+                return $qualifiedName;
+            }
         }
 
         do {
