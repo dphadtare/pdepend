@@ -182,6 +182,18 @@ if (!defined('T_COALESCE_EQUAL')) {
 }
 
 /**
+ * Define PHP 8.0 tokens
+ */
+if (!defined('T_NAME_QUALIFIED')) {
+    define('T_NAME_QUALIFIED', 314);
+}
+
+if (!defined('T_NAME_FULLY_QUALIFIED')) {
+    define('T_NAME_FULLY_QUALIFIED', 312);
+}
+
+
+/**
  * This tokenizer uses the internal {@link token_get_all()} function as token stream
  * generator.
  *
@@ -222,6 +234,7 @@ class PHPTokenizerInternal implements FullTokenizer
         T_ARRAY                     => Tokens::T_ARRAY,
         T_BREAK                     => Tokens::T_BREAK,
         T_CLASS                     => Tokens::T_CLASS,
+        T_NAME_FULLY_QUALIFIED      => Tokens::T_CLASS,
         T_CATCH                     => Tokens::T_CATCH,
         T_CLONE                     => Tokens::T_CLONE,
         T_CONST                     => Tokens::T_CONST,
@@ -275,6 +288,7 @@ class PHPTokenizerInternal implements FullTokenizer
         T_MOD_EQUAL                 => Tokens::T_MOD_EQUAL,
         T_MUL_EQUAL                 => Tokens::T_MUL_EQUAL,
         T_NAMESPACE                 => Tokens::T_NAMESPACE,
+        T_NAME_QUALIFIED            => Tokens::T_NAMESPACE,
         T_XOR_EQUAL                 => Tokens::T_XOR_EQUAL,
         T_INTERFACE                 => Tokens::T_INTERFACE,
         T_BOOL_CAST                 => Tokens::T_BOOL_CAST,

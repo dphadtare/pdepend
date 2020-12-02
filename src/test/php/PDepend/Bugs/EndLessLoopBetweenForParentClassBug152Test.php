@@ -60,10 +60,6 @@ class EndLessLoopBetweenForParentClassBug152Test extends AbstractRegressionTest
      */
     public function testClassNotResultsInEndlessLoopWhileCallingGetParentClass()
     {
-        if (version_compare(PHP_VERSION, '8.0.0', '>=')) {
-            $this->markTestSkipped('PHP 8 behave with unexpected token instead.');
-        }
-
         $this->parseCodeResourceForTest()
             ->current()
             ->getClasses()
@@ -79,10 +75,6 @@ class EndLessLoopBetweenForParentClassBug152Test extends AbstractRegressionTest
      */
     public function testClassNotResultsInEndlessLoopWhileCallingGetParentClass2()
     {
-        if (version_compare(PHP_VERSION, '8.0.0', '>=')) {
-            $this->markTestSkipped('PHP 8 behave with unexpected token instead.');
-        }
-
         $this->parseCodeResourceForTest()
             ->current()
             ->getClasses()
@@ -97,10 +89,6 @@ class EndLessLoopBetweenForParentClassBug152Test extends AbstractRegressionTest
      */
     public function testClassNotResultsInEndlessLoopWhileCallingGetInterfaces()
     {
-        if (version_compare(PHP_VERSION, '8.0.0', '>=')) {
-            $this->markTestSkipped('PHP 8 behave with unexpected token instead.');
-        }
-
         $this->parseCodeResourceForTest()
             ->current()
             ->getClasses()
@@ -115,10 +103,6 @@ class EndLessLoopBetweenForParentClassBug152Test extends AbstractRegressionTest
      */
     public function testClassNotResultsInEndlessLoopWhileCallingGetInterfaces2()
     {
-        if (version_compare(PHP_VERSION, '8.0.0', '>=')) {
-            $this->markTestSkipped('PHP 8 behave with unexpected token instead.');
-        }
-
         $this->parseCodeResourceForTest()
             ->current()
             ->getClasses()
@@ -133,10 +117,6 @@ class EndLessLoopBetweenForParentClassBug152Test extends AbstractRegressionTest
      */
     public function testClassNotResultsInEndlessLoopWhileCallingGetInterfaces3()
     {
-        if (version_compare(PHP_VERSION, '8.0.0', '>=')) {
-            $this->markTestSkipped('PHP 8 behave with unexpected token instead.');
-        }
-
         $this->parseCodeResourceForTest()
             ->current()
             ->getClasses()
