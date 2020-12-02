@@ -165,6 +165,7 @@ abstract class AbstractASTClassOrInterface extends AbstractASTType
     public function getInterfaces()
     {
         $stack = $this->getParentClasses();
+        array_unshift($stack, $this);
 
         $interfaces = array();
 
