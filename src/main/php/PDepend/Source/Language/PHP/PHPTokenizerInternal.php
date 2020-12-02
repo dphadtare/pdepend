@@ -707,7 +707,7 @@ class PHPTokenizerInternal implements FullTokenizer
      * Returns the type of next token, after the current token. This method
      * ignores all comments between the current and the next token.
      *
-     * @return integer
+     * @return integer|null
      * @since  0.9.12
      */
     public function peekNext()
@@ -717,7 +717,13 @@ class PHPTokenizerInternal implements FullTokenizer
         $offset = 0;
 
         do {
-            $type = $this->tokens[$this->index + ++$offset]->type;
+            $index = $this->index + ++$offset;
+
+            if (!isset($this->tokens[$index])) {
+                return null;
+            }
+
+            $type = $this->tokens[$index]->type;
         } while ($type == Tokens::T_COMMENT || $type == Tokens::T_DOC_COMMENT);
 
         return $type;

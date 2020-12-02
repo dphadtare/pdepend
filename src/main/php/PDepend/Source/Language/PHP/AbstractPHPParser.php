@@ -6125,12 +6125,13 @@ abstract class AbstractPHPParser
             $qualifiedName[] = $this->parseClassName();
 
             $this->consumeComments();
-            $tokenType = $this->tokenizer->peek();
+        }
 
-            // Stop here for simple identifier
-            if ($tokenType !== Tokens::T_BACKSLASH) {
-                return $qualifiedName;
-            }
+        $next = $this->tokenizer->peekNext();
+
+        // Stop here for simple identifier
+        if ($next !== Tokens::T_BACKSLASH && !empty($qualifiedName)) {
+            return $qualifiedName;
         }
 
         do {

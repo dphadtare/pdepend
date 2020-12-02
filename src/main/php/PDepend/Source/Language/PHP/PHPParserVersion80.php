@@ -38,37 +38,55 @@
  *
  * @copyright 2008-2017 Manuel Pichler. All rights reserved.
  * @license http://www.opensource.org/licenses/bsd-license.php BSD License
+ * @since 2.3
  */
 
-namespace PDepend\Source\Parser;
+namespace PDepend\Source\Language\PHP;
 
-use PDepend\Source\Tokenizer\Token;
+use PDepend\Source\AST\ASTFieldDeclaration;
+use PDepend\Source\AST\ASTType;
+use PDepend\Source\Parser\UnexpectedTokenException;
+use PDepend\Source\Tokenizer\Tokens;
 
 /**
- * This type of exception is thrown when the parser detects an unexpected token.
+ * Concrete parser implementation that supports features up to PHP version 7.4.
  *
  * @copyright 2008-2017 Manuel Pichler. All rights reserved.
  * @license http://www.opensource.org/licenses/bsd-license.php BSD License
+ * @since 2.4
  */
-class UnexpectedTokenException extends TokenException
+abstract class PHPParserVersion80 extends PHPParserVersion74
 {
     /**
-     * Constructs a new unexpected token exception.
+     * Will return <b>true</b> if the given <b>$tokenType</b> is a valid class
+     * name part.
      *
-     * @param Token  $token    The last parsed token instance.
-     * @param string $fileName The file where the exception occurred.
+     * @param integer $tokenType The type of a parsed token.
+     *
+     * @return boolean
+     * @since  0.10.6
      */
-    public function __construct(Token $token, $fileName)
+    protected function isClassName($tokenType)
     {
-        $message = sprintf(
-            'Unexpected token: %s, line: %d, col: %d, file: %s.%s',
-            $token->image,
-            $token->startLine,
-            $token->startColumn,
-            $fileName,
-            "\n".(new \Exception())->getTraceAsString()
-        );
+        switch ($tokenType) {
+            case Tokens::T_DIR:
+            case Tokens::T_USE:
+            case Tokens::T_GOTO:
+            case Tokens::T_NULL:
+            case Tokens::T_NS_C:
+            case Tokens::T_TRUE:
+            case Tokens::T_CLONE:
+            case Tokens::T_FALSE:
+            case Tokens::T_TRAIT:
+            case Tokens::T_STRING:
+            case Tokens::T_TRAIT_C:
+            case Tokens::T_CALLABLE:
+            case Tokens::T_INSTEADOF:
+            case Tokens::T_NAMESPACE:
+            case Tokens::T_CLASS:
+                return true;
+        }
 
-        parent::__construct($message);
+        return false;
     }
 }
