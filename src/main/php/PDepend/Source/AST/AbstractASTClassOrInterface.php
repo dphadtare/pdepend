@@ -118,12 +118,15 @@ abstract class AbstractASTClassOrInterface extends AbstractASTType
     {
         $parents = array();
         $parent  = $this;
+
         while (is_object($parent = $parent->getParentClass())) {
             if (in_array($parent, $parents, true)) {
                 throw new ASTClassOrInterfaceRecursiveInheritanceException($parent);
             }
+
             $parents[] = $parent;
         }
+
         return $parents;
     }
 
@@ -162,16 +165,17 @@ abstract class AbstractASTClassOrInterface extends AbstractASTType
     public function getInterfaces()
     {
         $stack = $this->getParentClasses();
-        array_unshift($stack, $this);
 
         $interfaces = array();
 
         while (($top = array_pop($stack)) !== null) {
             foreach ($top->interfaceReferences as $interfaceReference) {
                 $interface = $interfaceReference->getType();
+
                 if (in_array($interface, $interfaces, true) === true) {
                     continue;
                 }
+
                 $interfaces[] = $interface;
                 $stack[] = $interface;
             }
